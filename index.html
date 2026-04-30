@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo &amp; Orbit | Amplify Your Mission</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&family=Lato:wght@400;700&family=Quicksand:wght@600&family=Space+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy:       #1a2b4a;
+      --charcoal:   #3d3d3d;
+      --sage:       #6b9a7f;
+      --light-sage: #c7dcd3;
+      --cream:      #f5f3ed;
+      --white:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      color: var(--charcoal);
+      background-color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 6%;
+      background: var(--white);
+      border-bottom: 1px solid #e8e6df;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 2rem;
+      font-family: 'Lato', sans-serif;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--sage); }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 85vh;
+      background: linear-gradient(160deg, var(--cream) 0%, #eef2ee 100%);
+      padding: 4rem 6%;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 860px; }
+
+    /* SVG logo badge */
+    .logo-badge {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 1.75rem;
+      display: block;
+    }
+
+    .tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: var(--sage);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--charcoal);
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── VISION / MISSION ── */
+    .vm-section {
+      padding: 5rem 6%;
+      background: var(--white);
+    }
+
+    .vm-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .vm-divider {
+      border: none;
+      border-top: 1px solid var(--light-sage);
+      margin: 3rem 0;
+    }
+
+    .vm-inner h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .vm-inner p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--charcoal);
+    }
+
+    .vm-inner p + p { margin-top: 1rem; }
+
+    .highlight { color: var(--sage); font-weight: 700; }
+
+    .climate-link {
+      color: var(--sage);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* ── CORE VALUES ── */
+    .values-section {
+      background: var(--light-sage);
+      padding: 5rem 6%;
+    }
+
+    .values-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2.5rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+
+    .value-card {
+      background: var(--white);
+      padding: 2rem 2rem 2.25rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(26,43,74,0.07);
+    }
+
+    .value-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .value-card p {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--charcoal);
+    }
+
+    /* ── OUR WORK ── */
+    .work-section {
+      background: var(--white);
+      padding: 5rem 6%;
+    }
+
+    .work-inner { max-width: 1100px; margin: 0 auto; }
+
+    .work-intro {
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      margin-bottom: 2.5rem;
+      max-width: 720px;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .work-card {
+      border: 2px solid var(--light-sage);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+
+    .work-card:hover {
+      border-color: var(--sage);
+      box-shadow: 0 6px 18px rgba(107,154,127,0.15);
+      transform: translateY(-3px);
+    }
+
+    .work-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .work-card p {
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .work-link {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      background: var(--sage);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 4px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.25s;
+    }
+
+    .work-link:hover { background: var(--navy); }
+
+    /* ── SIGNUP ── */
+    .signup-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #253d5f 100%);
+      color: var(--white);
+      padding: 5rem 6%;
+      text-align: center;
+    }
+
+    .signup-inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .signup-inner h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .signup-inner p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      opacity: 0.9;
+      margin-bottom: 2.25rem;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .form-input {
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      font-family: 'Lato', sans-serif;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .form-input:focus { box-shadow: 0 0 0 3px rgba(107,154,127,0.5); }
+
+    .form-btn {
+      padding: 0.9rem;
+      background: var(--sage);
+      color: var(--white);
+      border: none;
+      border-radius: 5px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .form-btn:hover { background: #5a8a6f; transform: translateY(-2px); }
+    .form-btn:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      font-size: 1rem;
+      color: var(--light-sage);
+      padding: 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: var(--cream);
+      text-align: center;
+      padding: 1.75rem 6%;
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--light-sage);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+
+      .values-grid,
+      .work-grid { grid-template-columns: 1fr; }
+
+      .logo-badge { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">ECHO &amp; ORBIT</a>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#values">Values</a>
+      <a href="#work">Our Work</a>
+      <a href="#signup">Stay in Touch</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <!-- Inline SVG logo badge — no external image needed -->
+      <svg class="logo-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Echo and Orbit logo">
+        <circle cx="100" cy="100" r="96" fill="#1a2b4a" stroke="#3d3d3d" stroke-width="4"/>
+        <ellipse cx="100" cy="100" rx="88" ry="88" fill="none" stroke="#6b9a7f" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="100" cy="100" rx="78" ry="78" fill="none" stroke="#f5f3ed" stroke-width="1" opacity="0.25"/>
+        <circle cx="158" cy="46" r="5" fill="#3d3d3d"/>
+        <circle cx="42" cy="154" r="5" fill="#3d3d3d"/>
+        <text x="100" y="82" font-family="Montserrat, sans-serif" font-size="26" font-weight="700" fill="#f5f3ed" text-anchor="middle" letter-spacing="2">ECHO</text>
+        <text x="100" y="108" font-family="Montserrat, sans-serif" font-size="14" font-weight="400" fill="#6b9a7f" text-anchor="middle">&amp;</text>
+        <text x="100" y="138" font-family="Montserrat, sans-serif" font-size="26" font-weight="700" fill="#f5f3ed" text-anchor="middle" letter-spacing="2">ORBIT</text>
+      </svg>
+
+      <p class="tagline">Amplify Your Mission</p>
+      <h1>High-Tech Infrastructure<br>for Underdogs</h1>
+      <p>Groundswell movements and mission-driven organizations deserve the same elite-tier technology as billion-dollar companies — without the billion-dollar budget or environmental cost.</p>
+    </div>
+  </section>
+
+  <!-- VISION / MISSION -->
+  <section class="vm-section" id="mission">
+    <div class="vm-inner">
+      <h2>The Vision</h2>
+      <p>We want to see a world where the power of high-level technology belongs to the people, ensuring that every voice has the digital foundation to be heard.</p>
+
+      <hr class="vm-divider" />
+
+      <h2>The Mission</h2>
+      <p>Our mission is to <span class="highlight">amplify</span> the voices that matter by building smart, accessible, and eco-conscious web tools. We give the underdogs the digital platforms that tech giants are gatekeeping, empowering them to focus on the work that changes lives.</p>
+      <p>We believe those working for the good of others deserve the same <span class="highlight">innovative technology</span> as the elite — because impact shouldn't be limited by a paywall.</p>
+      <p>All while keeping the environment in mind. Learn about our <a href="#" class="climate-link">Climate Pledge</a>.</p>
+    </div>
+  </section>
+
+  <!-- CORE VALUES -->
+  <section class="values-section" id="values">
+    <div class="values-inner">
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h3>Radical Accessibility</h3>
+          <p>High-level technology shouldn't be a luxury item. We're dedicated to tearing down the digital gatekeeping that keeps innovative tools in the hands of the elite. By providing nonprofits and grassroots candidates with elite-tier infrastructure, we ensure equity isn't just a goal — it's the foundation.</p>
+        </div>
+        <div class="value-card">
+          <h3>Low-Carbon Innovation</h3>
+          <p>We refuse to sacrifice the future to build the present. Innovation shouldn't come at the cost of the environment. To ensure our AI-driven tools and web platforms are a net positive for the planet, we've integrated sustainability into our financial DNA.</p>
+        </div>
+        <div class="value-card">
+          <h3>Rooted Growth</h3>
+          <p>While we reach for the "Orbit," we stay grounded in our "Echo." We prioritize the health of our local Knoxville and Tennessee communities, supporting the businesses and residents who make our home what it is. We grow only as our community grows.</p>
+        </div>
+        <div class="value-card">
+          <h3>Transparent Intelligence</h3>
+          <p>We believe in tech that serves humans, not the other way around. We are open about our use of AI and automation, using these tools to give time back to our clients so they can continue fighting the good fight. Our tech is smart, but our intentions are always human-first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR WORK -->
+  <section class="work-section" id="work">
+    <div class="work-inner">
+      <h2 class="section-title">Our Work</h2>
+      <p class="work-intro">We've built digital infrastructure for mission-driven organizations tackling the issues that matter most.</p>
+      <div class="work-grid">
+        <div class="work-card">
+          <h3>Vote 4 Kids</h3>
+          <p>A comprehensive candidate tracker for Tennessee voters, making it easy to find where candidates stand on issues affecting children and families.</p>
+          <a href="https://vote4kids.org" target="_blank" rel="noopener noreferrer" class="work-link">Visit Site →</a>
+        </div>
+        <div class="work-card">
+          <h3>EC Policy Watch</h3>
+          <p>Transparent policy tracking and civic information for community advocates, bringing clarity to complex legislative landscapes.</p>
+          <a href="https://ecpolicywatch.com" target="_blank" rel="noopener noreferrer" class="work-link">Visit Site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="signup-section" id="signup">
+    <div class="signup-inner">
+      <h2>Stay in the Loop</h2>
+      <p>Get updates on new tools, features, and stories from the frontlines of digital equity.</p>
+      <form class="signup-form" id="signup-form" novalidate>
+        <input
+          id="email-input"
+          type="email"
+          class="form-input"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit" class="form-btn">Sign Up for Updates</button>
+        <div class="form-success" id="form-success" role="status" aria-live="polite">
+          ✓ You're on the list! We'll be in touch.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Echo &amp; Orbit &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#96e4f9f4f3e4e2e5f4fcf3e5e5d6f1fbf7fffab8f5f9fb">Get in Touch</a></p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const form = document.getElementById('signup-form');
+    const emailInput = document.getElementById('email-input');
+    const submitBtn = form.querySelector('.form-btn');
+    const successDiv = document.getElementById('form-success');
+
+    // Simple email validation
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (!isValidEmail(email)) {
+        emailInput.style.boxShadow = '0 0 0 3px rgba(220,50,50,0.4)';
+        emailInput.focus();
+        return;
+      }
+
+      emailInput.style.boxShadow = '';
+
+      // ── SWAP IN YOUR EMAIL SERVICE URL HERE WHEN READY ──
+      // fetch('https://your-endpoint.workers.dev', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email })
+      // });
+
+      // For now: store locally in localStorage
+      const signups = JSON.parse(localStorage.getItem('eo_signups') || '[]');
+      signups.push({ email, date: new Date().toISOString() });
+      localStorage.setItem('eo_signups', JSON.stringify(signups));
+
+      // Show success state
+      emailInput.style.display = 'none';
+      submitBtn.style.display = 'none';
+      successDiv.style.display = 'block';
+
+      // Reset after 4s
+      setTimeout(() => {
+        emailInput.style.display = '';
+        submitBtn.style.display = '';
+        successDiv.style.display = 'none';
+        emailInput.value = '';
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>
