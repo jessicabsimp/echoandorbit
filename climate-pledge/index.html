@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Climate Pledge | Echo &amp; Orbit</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2b4a; --slate: #2e3a4e; --charcoal: #3d3d3d;
+      --sage: #6b9a7f; --light-sage: #c7dcd3; --cream: #f5f3ed; --white: #ffffff;
+      --side: 12vw;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; line-height: 1.6; color: var(--charcoal); background: var(--white); }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem var(--side); background: var(--navy);
+      border-bottom: 1px solid var(--slate); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 3.2rem; width: auto; display: block; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-logo-name { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--cream); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-logo-tagline { color: var(--sage); font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 1rem; margin-left: 2rem; font-family: 'Space Mono', monospace; letter-spacing: 0.5px; transition: color 0.2s; opacity: 0.8; }
+    .nav-links a:hover, .nav-links a.active { color: var(--sage); opacity: 1; }
+
+    .page-header {
+      background: linear-gradient(160deg, #e8f0eb 0%, var(--light-sage) 100%);
+      border-bottom: 1px solid var(--slate); padding: 5rem var(--side) 4rem;
+    }
+    .page-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .page-title { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: var(--navy); letter-spacing: -1px; line-height: 1.05; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .page-subtitle { font-size: 1.1rem; color: var(--charcoal); line-height: 1.8; max-width: 640px; }
+
+    .pledge-section { padding: 5rem var(--side); background: var(--white); border-bottom: 1px solid var(--slate); }
+    .pledge-lead {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700; color: var(--navy); line-height: 1.5; margin-bottom: 3rem;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--light-sage);
+    }
+    .pledge-lead em { font-style: normal; color: var(--sage); }
+
+    .commitments { display: flex; flex-direction: column; gap: 0; }
+    .commitment {
+      display: grid; grid-template-columns: 80px 1fr; gap: 2rem;
+      padding: 2.5rem 0; border-bottom: 1px solid #eee; align-items: start;
+    }
+    .commitment:last-child { border-bottom: none; }
+    .commit-num {
+      font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 400;
+      color: var(--light-sage); line-height: 1; padding-top: 4px;
+    }
+    .commit-content h3 {
+      font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800;
+      color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem;
+    }
+    .commit-content p { font-size: 1rem; line-height: 1.8; color: var(--charcoal); }
+
+    .pledge-statement {
+      background: var(--navy); padding: 5rem var(--side); border-bottom: 1px solid var(--slate);
+    }
+    .statement-inner { max-width: 800px; }
+    .statement-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 1rem; opacity: 0.8; }
+    .statement-text {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 600; color: var(--cream); line-height: 1.6;
+    }
+    .statement-text em { font-style: normal; color: var(--sage); }
+    .statement-sig {
+      margin-top: 2rem; font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      color: #556a85; letter-spacing: 1px;
+    }
+
+    footer {
+      background: #0d1520; color: #556a85; text-align: center;
+      padding: 1.5rem var(--side); font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.5px; border-top: 1px solid var(--slate);
+    }
+    footer a { color: var(--sage); text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .page-header, .pledge-section, .pledge-statement { padding: 3.5rem 8%; }
+      footer { padding: 1.5rem 8%; }
+      .commitment { grid-template-columns: 50px 1fr; gap: 1.25rem; }
+      .commit-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">
+      <img class="nav-logo-img" src="../logo-cream.png" alt="Echo &amp; Orbit logo" />
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">ECHO &amp; ORBIT</span>
+        <span class="nav-logo-tagline">// AMPLIFY YOUR MISSION</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#mission">Mission</a>
+      <a href="/#values">Values</a>
+      <a href="/services">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/climate-pledge" class="active">Climate</a>
+      <a href="/#signup">Updates</a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <p class="page-label">// Low-Carbon Innovation</p>
+    <h1 class="page-title">Climate Pledge</h1>
+    <p class="page-subtitle">We believe the future is worth building for. Innovation shouldn't come at the cost of the planet — so we've made sustainability a non-negotiable part of how we operate.</p>
+  </header>
+
+  <section class="pledge-section">
+    <p class="pledge-lead">
+      We refuse to sacrifice the future to build the present.<br>
+      <em>Every line of code we ship is accountable to that.</em>
+    </p>
+
+    <div class="commitments">
+      <div class="commitment">
+        <div class="commit-num">01</div>
+        <div class="commit-content">
+          <h3>Sustainability in Our Financial DNA</h3>
+          <p>A percentage of every project fee is allocated to verified carbon offset and climate action programs. This isn't a line item we cut when margins get tight — it's built into our pricing model from the start. Impact work shouldn't create environmental debt.</p>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commit-num">02</div>
+        <div class="commit-content">
+          <h3>Low-Energy Infrastructure by Default</h3>
+          <p>We build and host on platforms that prioritize renewable energy and energy-efficient infrastructure. When we evaluate tools, frameworks, and hosting providers, environmental footprint is part of the criteria — not an afterthought.</p>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commit-num">03</div>
+        <div class="commit-content">
+          <h3>Lean Code, Lower Footprint</h3>
+          <p>Bloated, inefficient software consumes more server resources and more energy. We write clean, optimized code — not just because it performs better, but because it costs the planet less. Fast sites are green sites.</p>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commit-num">04</div>
+        <div class="commit-content">
+          <h3>Transparent Accountability</h3>
+          <p>We are open about our environmental impact and honest when we fall short. As we grow, we commit to publishing an annual impact summary — what we offset, where it went, and where we need to do better. No greenwashing. Just math and accountability.</p>
+        </div>
+      </div>
+      <div class="commitment">
+        <div class="commit-num">05</div>
+        <div class="commit-content">
+          <h3>Rooted in Community</h3>
+          <p>Our climate commitment isn't abstract. We prioritize suppliers, partners, and community initiatives in Knoxville and Tennessee that align with sustainable practices. Building locally means shorter supply chains, stronger relationships, and a healthier home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pledge-statement">
+    <div class="statement-inner">
+      <p class="statement-label">// Our Commitment</p>
+      <p class="statement-text">
+        "We will never knowingly build a product that makes the planet worse. Every client we serve, every dollar we earn, and every tool we deploy will be measured against a simple question: <em>is this a net positive for the world we're building toward?</em>"
+      </p>
+      <p class="statement-sig">— Echo &amp; Orbit, Knoxville TN &nbsp;// &nbsp;Est. 2026</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 ECHO &amp; ORBIT &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="mailto:jessicabsimp@gmail.com">GET IN TOUCH</a></p>
+  </footer>
+
+</body>
+</html>
