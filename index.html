@@ -181,7 +181,6 @@
       font-size: 1.05rem;
       color: var(--charcoal);
       line-height: 1.8;
-      max-width: 520px;
       margin-bottom: 2.25rem;
     }
 
@@ -425,11 +424,32 @@
 
     .bento-card {
       border: 1px solid var(--slate);
-      padding: 2.25rem 2rem;
+      padding: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       min-height: 220px;
+      overflow: hidden;
+    }
+
+    .bento-preview {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      border-bottom: 1px solid var(--slate);
+      opacity: 0.92;
+      transition: opacity 0.3s;
+    }
+
+    .bento-card:hover .bento-preview { opacity: 1; }
+
+    .bento-content {
+      padding: 1.75rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .bento-card.featured { background: var(--navy); color: var(--cream); }
@@ -658,7 +678,7 @@
     <div class="hero-left">
       <p class="tagline">// v1.0.0 &nbsp;&mdash;&nbsp; Knoxville, TN</p>
       <h1>High-Tech<br>Infrastructure<br>for <em>Underdogs</em></h1>
-      <p class="hero-desc">Groundswell movements and mission-driven organizations deserve the same elite-tier technology as billion-dollar companies — without the billion-dollar budget or environmental cost.</p>
+      <p class="hero-desc">High-level tech shouldn't be a gatekept luxury. We give nonprofits and local movements the power of a billion-dollar dev team—without the corporate overhead or the climate cost.</p>
       <a href="#signup" class="hero-cta">→ STAY IN THE LOOP</a>
     </div>
 
@@ -744,22 +764,28 @@
       <!-- Featured 2fr card -->
       <div class="bento-card featured bracketed">
         <span class="bracket-tr"></span><span class="bracket-bl"></span>
-        <div>
-          <p class="card-label">// Civic Tech &mdash; Tennessee</p>
-          <h3>Vote 4 Kids</h3>
-          <p>A comprehensive candidate tracker for Tennessee voters — making it easy to find where every candidate stands on issues affecting children and families. Elite infrastructure. Grassroots mission.</p>
+        <img class="bento-preview" src="images/vote4kids-preview.jpg" alt="Vote 4 Kids — Tennessee candidate tracker" />
+        <div class="bento-content">
+          <div>
+            <p class="card-label">// Civic Tech &mdash; Tennessee</p>
+            <h3>Vote 4 Kids</h3>
+            <p>A comprehensive candidate tracker for Tennessee's 2026 midterms — making it easy to find where every candidate stands on issues affecting children and families.</p>
+          </div>
+          <a href="https://vote4kids.org" target="_blank" rel="noopener noreferrer" class="bento-link">→ VISIT SITE</a>
         </div>
-        <a href="https://vote4kids.org" target="_blank" rel="noopener noreferrer" class="bento-link">→ VISIT SITE</a>
       </div>
       <!-- Secondary 1fr card -->
       <div class="bento-card secondary bracketed">
         <span class="bracket-tr"></span><span class="bracket-bl"></span>
-        <div>
-          <p class="card-label">// Policy Tracking</p>
-          <h3>EC Policy Watch</h3>
-          <p>Transparent policy tracking and civic information for community advocates.</p>
+        <img class="bento-preview" src="images/ecpolicywatch-preview.jpg" alt="EC Policy Watch — policy tracking dashboard" />
+        <div class="bento-content">
+          <div>
+            <p class="card-label">// Policy Tracking</p>
+            <h3>EC Policy Watch</h3>
+            <p>Transparent legislative tracking and civic tools for community advocates and policy teams.</p>
+          </div>
+          <a href="https://ecpolicywatch.com" target="_blank" rel="noopener noreferrer" class="bento-link">→ VISIT SITE</a>
         </div>
-        <a href="https://ecpolicywatch.com" target="_blank" rel="noopener noreferrer" class="bento-link">→ VISIT SITE</a>
       </div>
     </div>
   </section>
