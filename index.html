@@ -27,6 +27,15 @@
 
     html { scroll-behavior: smooth; }
 
+    /* ── ANNOUNCEMENT BANNER ── */
+    .site-banner {
+      background: var(--sage); color: var(--white);
+      text-align: center; padding: 0.55rem var(--side);
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 1.5px; border-bottom: 1px solid #5a8a6f;
+    }
+    .site-banner a { color: var(--white); text-decoration: underline; margin-left: 0.5rem; }
+
     body {
       font-family: 'Lato', sans-serif;
       line-height: 1.6;
@@ -653,9 +662,15 @@
 </head>
 <body>
 
+  <!-- ANNOUNCEMENT BANNER -->
+  <div class="site-banner">
+    // NOW ACCEPTING NEW PROJECTS FOR 2026 &nbsp;&mdash;&nbsp;
+    <a href="/services#contact">START A PROJECT →</a>
+  </div>
+
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">
+    <a class="nav-logo" href="/">
       <img class="nav-logo-img" src="logo-cream.png" alt="Echo &amp; Orbit logo" />
       <div class="nav-logo-text">
         <span class="nav-logo-name">ECHO &amp; ORBIT</span>
@@ -663,12 +678,9 @@
       </div>
     </a>
     <div class="nav-links">
-      <a href="#mission">Mission</a>
-      <a href="#values">Values</a>
       <a href="/services">Services</a>
-      <a href="#work">Work</a>
+      <a href="/projects">Our Projects</a>
       <a href="/climate-pledge">Climate</a>
-      <a href="#signup">Updates</a>
     </div>
   </nav>
 
@@ -757,9 +769,9 @@
 
   <!-- OUR WORK — BENTO -->
   <section class="work-section" id="work">
-    <p class="section-label">// 03 — Deployments</p>
+    <p class="section-label">// 03 — Featured Projects</p>
     <h2 class="section-title">Our Work</h2>
-    <p class="work-intro">Digital infrastructure built for mission-driven organizations tackling the issues that matter most.</p>
+    <p class="work-intro">Digital infrastructure built for mission-driven organizations tackling the issues that matter most. <a href="/projects" style="color:var(--sage);font-weight:700;text-decoration:underline;">See all projects →</a></p>
     <div class="bento-grid">
       <!-- Featured 2fr card -->
       <div class="bento-card featured bracketed">
