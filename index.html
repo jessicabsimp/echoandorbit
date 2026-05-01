@@ -620,7 +620,7 @@
         padding: 4rem 8%;
       }
 
-      .hero-right { padding: 3rem 8%; }
+      .hero-right { padding: 2rem 8% 3rem; }
 
       .vm-grid {
         grid-template-columns: 1fr;
@@ -796,10 +796,24 @@
     <div class="signup-inner">
       <h2>Stay in<br>the Loop</h2>
       <p>Updates on new tools, features, and stories from the frontlines of digital equity.</p>
-      <form class="signup-form" id="signup-form" novalidate>
+      <form
+        class="signup-form"
+        id="signup-form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        <!-- Web3Forms config -->
+        <input type="hidden" name="access_key" value="ad3cd340-f09c-47fe-93e7-704700effab7" />
+        <input type="hidden" name="subject" value="New signup — Echo &amp; Orbit" />
+        <input type="hidden" name="from_name" value="Echo &amp; Orbit Website" />
+        <input type="hidden" name="redirect" value="false" />
+        <!-- Honeypot spam block -->
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" />
+
         <input
           id="email-input"
           type="email"
+          name="email"
           class="form-input"
           placeholder="your@email.com"
           autocomplete="email"
@@ -886,41 +900,52 @@
     // Start typing after a short initial delay
     setTimeout(typeTick, 800);
 
-    /* ── EMAIL FORM ── */
+    /* ── EMAIL FORM (Web3Forms → jessicabsimp@gmail.com) ── */
     const form       = document.getElementById('signup-form');
     const emailInput = document.getElementById('email-input');
     const submitBtn  = form.querySelector('.form-btn');
     const successDiv = document.getElementById('form-success');
 
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const email = emailInput.value.trim();
 
-      if (!isValidEmail(email)) {
+      const email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         emailInput.style.borderColor = '#ff5f57';
         emailInput.focus();
         return;
       }
 
       emailInput.style.borderColor = '';
+      submitBtn.textContent = 'SENDING…';
+      submitBtn.disabled = true;
 
-      // Store locally until a backend is wired up
-      const signups = JSON.parse(localStorage.getItem('eo_signups') || '[]');
-      signups.push({ email, date: new Date().toISOString() });
-      localStorage.setItem('eo_signups', JSON.stringify(signups));
+      try {
+        const data = new FormData(form);
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        const json = await res.json();
 
-      form.style.display = 'none';
-      successDiv.style.display = 'block';
-
-      setTimeout(() => {
-        form.style.display = '';
-        successDiv.style.display = 'none';
-        emailInput.value = '';
-      }, 4000);
+        if (json.success) {
+          form.style.display = 'none';
+          successDiv.style.display = 'block';
+          setTimeout(() => {
+            form.style.display = '';
+            successDiv.style.display = 'none';
+            emailInput.value = '';
+            submitBtn.textContent = 'SIGN UP →';
+            submitBtn.disabled = false;
+          }, 4000);
+        } else {
+          throw new Error(json.message || 'Submission failed');
+        }
+      } catch (err) {
+        submitBtn.textContent = 'TRY AGAIN →';
+        submitBtn.disabled = false;
+        emailInput.style.borderColor = '#ff5f57';
+      }
     });
   </script>
 </body>
