@@ -6,21 +6,21 @@
   <title>Echo &amp; Orbit | Amplify Your Mission</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&family=Lato:wght@400;700&family=Quicksand:wght@600&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;600&family=Lato:wght@400;700&family=Quicksand:wght@600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --navy:       #1a2b4a;
+      --slate:      #2e3a4e;
       --charcoal:   #3d3d3d;
       --sage:       #6b9a7f;
       --light-sage: #c7dcd3;
       --cream:      #f5f3ed;
       --white:      #ffffff;
+      --terminal-bg: #0d1520;
+      --terminal-green: #5ddb8f;
+      --terminal-dim:   #4a8a65;
     }
 
     html { scroll-behavior: smooth; }
@@ -29,17 +29,47 @@
       font-family: 'Lato', sans-serif;
       line-height: 1.6;
       color: var(--charcoal);
-      background-color: var(--white);
+      background: var(--white);
     }
 
-    /* ── NAV ── */
+    .bracketed { position: relative; }
+
+    .bracketed::before,
+    .bracketed::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--slate);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bracketed::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .bracketed::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .bracketed .bracket-tr,
+    .bracketed .bracket-bl {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--slate);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bracketed .bracket-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .bracketed .bracket-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 6%;
+      padding: 1.1rem 6%;
       background: var(--white);
-      border-bottom: 1px solid #e8e6df;
+      border-bottom: 1px solid var(--slate);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -47,48 +77,53 @@
 
     .nav-logo {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 800;
       color: var(--navy);
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span {
+      color: var(--sage);
+      font-weight: 400;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      display: block;
+      margin-top: -2px;
     }
 
     .nav-links a {
       color: var(--charcoal);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-left: 2rem;
-      font-family: 'Lato', sans-serif;
-      transition: color 0.25s;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
     }
 
     .nav-links a:hover { color: var(--sage); }
 
-    /* ── HERO ── */
     .hero {
-      display: flex;
+      display: grid;
+      grid-template-columns: 60fr 40fr;
       align-items: center;
-      justify-content: center;
-      min-height: 85vh;
-      background: linear-gradient(160deg, var(--cream) 0%, #eef2ee 100%);
-      padding: 4rem 6%;
-      text-align: center;
+      min-height: 88vh;
+      background: linear-gradient(160deg, var(--cream) 0%, #eceee8 100%);
+      border-bottom: 1px solid var(--slate);
     }
 
-    .hero-inner { max-width: 860px; }
-
-    /* SVG logo badge */
-    .logo-badge {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 1.75rem;
-      display: block;
+    .hero-left {
+      padding: 5rem 5% 5rem 7%;
+      border-right: 1px solid var(--slate);
     }
 
     .tagline {
       font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       letter-spacing: 3px;
       color: var(--sage);
       text-transform: uppercase;
@@ -97,436 +132,559 @@
 
     .hero h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 700;
+      font-size: clamp(2.2rem, 4.5vw, 3.75rem);
+      font-weight: 800;
       color: var(--navy);
-      line-height: 1.15;
+      line-height: 1.05;
+      letter-spacing: -1px;
       margin-bottom: 1.5rem;
     }
 
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
+    .hero h1 em { font-style: normal; color: var(--sage); }
+
+    .hero-desc {
+      font-size: 1.05rem;
       color: var(--charcoal);
       line-height: 1.8;
-      max-width: 680px;
-      margin: 0 auto;
+      max-width: 520px;
+      margin-bottom: 2.25rem;
     }
 
-    /* ── VISION / MISSION ── */
-    .vm-section {
-      padding: 5rem 6%;
-      background: var(--white);
+    .hero-cta {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border: 1px solid var(--slate);
+      transition: background 0.2s, color 0.2s;
     }
 
-    .vm-inner {
-      max-width: 860px;
-      margin: 0 auto;
+    .hero-cta:hover { background: var(--sage); color: var(--white); }
+
+    .hero-right {
+      padding: 3.5rem 6% 3.5rem 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .vm-divider {
-      border: none;
-      border-top: 1px solid var(--light-sage);
-      margin: 3rem 0;
+    .terminal {
+      background: var(--terminal-bg);
+      border: 1px solid var(--slate);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow: hidden;
     }
 
-    .vm-inner h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 1rem;
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.8rem;
+      background: #1a2535;
+      border-bottom: 1px solid var(--slate);
     }
 
-    .vm-inner p {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--charcoal);
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+
+    .terminal-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: #556a85;
+      margin-left: auto;
+      letter-spacing: 1px;
     }
 
-    .vm-inner p + p { margin-top: 1rem; }
+    .terminal-body {
+      padding: 1.25rem 1.25rem 1.5rem;
+      min-height: 240px;
+    }
 
-    .highlight { color: var(--sage); font-weight: 700; }
+    .terminal-prompt { color: var(--terminal-green); margin-bottom: 0.5rem; }
+    .terminal-prompt .t-dim { color: #3d5a72; }
 
-    .climate-link {
+    #terminal-output { color: #c8d8e8; white-space: pre; }
+    #terminal-output .t-key   { color: #79b8ff; }
+    #terminal-output .t-str   { color: #9ecbff; }
+    #terminal-output .t-bool  { color: var(--terminal-green); }
+    #terminal-output .t-num   { color: #f8c555; }
+    #terminal-output .t-punct { color: #6a8faf; }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--terminal-green);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
       color: var(--sage);
-      font-weight: 700;
-      text-decoration: underline;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
-
-    /* ── CORE VALUES ── */
-    .values-section {
-      background: var(--light-sage);
-      padding: 5rem 6%;
-    }
-
-    .values-inner { max-width: 1100px; margin: 0 auto; }
 
     .section-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 800;
       color: var(--navy);
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
       margin-bottom: 2.5rem;
     }
 
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.75rem;
+    .vm-section {
+      padding: 5.5rem 7%;
+      background: var(--white);
+      border-bottom: 1px solid var(--slate);
     }
+
+    .vm-grid { display: grid; grid-template-columns: 70fr 30fr; gap: 0; }
+
+    .vm-mission { padding-right: 4rem; border-right: 1px solid var(--slate); }
+
+    .vm-vision { padding-left: 3rem; display: flex; flex-direction: column; justify-content: center; }
+
+    .vm-mission h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .vm-mission p { font-size: 1.05rem; line-height: 1.85; color: var(--charcoal); }
+    .vm-mission p + p { margin-top: 1rem; }
+    .highlight { color: var(--sage); font-weight: 700; }
+    .climate-link { color: var(--sage); font-weight: 700; text-decoration: underline; }
+
+    .vm-vision .vision-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: var(--slate);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    .vm-vision blockquote {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.45;
+      border: none;
+      padding: 0;
+    }
+
+    .vm-vision blockquote em { font-style: normal; color: var(--sage); }
+
+    .values-section {
+      background: var(--cream);
+      padding: 5.5rem 7%;
+      border-bottom: 1px solid var(--slate);
+    }
+
+    .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 
     .value-card {
       background: var(--white);
       padding: 2rem 2rem 2.25rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(26,43,74,0.07);
+      border: 1px solid var(--slate);
     }
 
     .value-card h3 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 0.75rem;
     }
 
-    .value-card p {
-      font-size: 0.97rem;
-      line-height: 1.75;
-      color: var(--charcoal);
-    }
+    .value-card p { font-size: 0.96rem; line-height: 1.75; color: var(--charcoal); }
 
-    /* ── OUR WORK ── */
     .work-section {
       background: var(--white);
-      padding: 5rem 6%;
+      padding: 5.5rem 7%;
+      border-bottom: 1px solid var(--slate);
     }
 
-    .work-inner { max-width: 1100px; margin: 0 auto; }
+    .work-intro { font-size: 1rem; color: var(--charcoal); margin-bottom: 2.5rem; max-width: 680px; }
 
-    .work-intro {
-      font-size: 1.05rem;
-      color: var(--charcoal);
-      margin-bottom: 2.5rem;
-      max-width: 720px;
+    .bento-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+
+    .bento-card {
+      border: 1px solid var(--slate);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
     }
 
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
+    .bento-card.featured { background: var(--navy); color: var(--cream); }
+    .bento-card.secondary { background: var(--cream); }
 
-    .work-card {
-      border: 2px solid var(--light-sage);
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
-      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
-    }
-
-    .work-card:hover {
-      border-color: var(--sage);
-      box-shadow: 0 6px 18px rgba(107,154,127,0.15);
-      transform: translateY(-3px);
-    }
-
-    .work-card h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--navy);
+    .bento-card .card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
 
-    .work-card p {
-      font-size: 0.95rem;
-      color: var(--charcoal);
-      line-height: 1.65;
-      margin-bottom: 1.5rem;
+    .bento-card.featured .card-label { color: var(--sage); }
+    .bento-card.secondary .card-label { color: var(--slate); opacity: 0.7; }
+
+    .bento-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
     }
 
-    .work-link {
+    .bento-card.featured h3 { color: var(--cream); }
+    .bento-card.secondary h3 { color: var(--navy); font-size: clamp(1.1rem, 2vw, 1.4rem); }
+
+    .bento-card p { font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem; flex-grow: 1; }
+    .bento-card.featured p { color: #a8bfd6; }
+    .bento-card.secondary p { color: var(--charcoal); }
+
+    .bento-link {
       display: inline-block;
-      padding: 0.65rem 1.5rem;
-      background: var(--sage);
-      color: var(--white);
+      padding: 0.65rem 1.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
       text-decoration: none;
-      border-radius: 4px;
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.25s;
+      border: 1px solid;
+      transition: all 0.2s;
+      align-self: flex-start;
     }
 
-    .work-link:hover { background: var(--navy); }
+    .bento-card.featured .bento-link { border-color: var(--sage); color: var(--sage); }
+    .bento-card.featured .bento-link:hover { background: var(--sage); color: var(--navy); }
+    .bento-card.secondary .bento-link { border-color: var(--slate); color: var(--navy); }
+    .bento-card.secondary .bento-link:hover { background: var(--navy); color: var(--cream); }
 
-    /* ── SIGNUP ── */
     .signup-section {
-      background: linear-gradient(135deg, var(--navy) 0%, #253d5f 100%);
+      background: var(--navy);
       color: var(--white);
-      padding: 5rem 6%;
-      text-align: center;
+      padding: 5.5rem 7%;
+      border-bottom: 1px solid #0d1520;
     }
 
-    .signup-inner {
-      max-width: 620px;
-      margin: 0 auto;
-    }
+    .signup-inner { max-width: 680px; }
 
     .signup-inner h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
       margin-bottom: 0.75rem;
     }
 
-    .signup-inner p {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      opacity: 0.9;
-      margin-bottom: 2.25rem;
-    }
+    .signup-inner p { font-size: 1rem; opacity: 0.8; margin-bottom: 2.25rem; line-height: 1.65; }
 
-    .signup-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
+    .signup-form { display: flex; gap: 0; max-width: 520px; }
 
     .form-input {
+      flex: 1;
       padding: 0.9rem 1rem;
-      font-size: 1rem;
-      font-family: 'Lato', sans-serif;
-      border: none;
-      border-radius: 5px;
+      font-size: 0.95rem;
+      font-family: 'Space Mono', monospace;
+      border: 1px solid var(--slate);
+      background: #0d1520;
+      color: var(--cream);
       outline: none;
     }
 
-    .form-input:focus { box-shadow: 0 0 0 3px rgba(107,154,127,0.5); }
+    .form-input::placeholder { color: #3d5a72; }
+    .form-input:focus { border-color: var(--sage); }
 
     .form-btn {
-      padding: 0.9rem;
+      padding: 0.9rem 1.5rem;
       background: var(--sage);
       color: var(--white);
-      border: none;
-      border-radius: 5px;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
+      border: 1px solid var(--sage);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: background 0.25s, transform 0.15s;
+      white-space: nowrap;
+      transition: background 0.2s;
     }
 
-    .form-btn:hover { background: #5a8a6f; transform: translateY(-2px); }
-    .form-btn:active { transform: translateY(0); }
+    .form-btn:hover { background: #5a8a6f; }
 
     .form-success {
       display: none;
-      font-size: 1rem;
-      color: var(--light-sage);
-      padding: 0.75rem;
-      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--terminal-green);
+      margin-top: 1rem;
     }
 
-    /* ── FOOTER ── */
     footer {
-      background: var(--navy);
-      color: var(--cream);
+      background: #0d1520;
+      color: #556a85;
       text-align: center;
-      padding: 1.75rem 6%;
-      font-size: 0.88rem;
+      padding: 1.5rem 7%;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      border-top: 1px solid var(--slate);
     }
 
-    footer a {
-      color: var(--light-sage);
-      text-decoration: none;
-    }
-
+    footer a { color: var(--sage); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--slate); padding: 4rem 6%; }
+      .hero-right { padding: 3rem 6%; }
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-mission { padding-right: 0; border-right: none; padding-bottom: 2.5rem; border-bottom: 1px solid var(--slate); }
+      .vm-vision { padding-left: 0; padding-top: 2.5rem; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .signup-form { flex-direction: column; }
+      .form-btn { width: 100%; }
       .nav-links { display: none; }
-
-      .values-grid,
-      .work-grid { grid-template-columns: 1fr; }
-
-      .logo-badge { width: 110px; height: 110px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">ECHO &amp; ORBIT</a>
+    <a class="nav-logo" href="#">
+      ECHO &amp; ORBIT
+      <span>// AMPLIFY YOUR MISSION</span>
+    </a>
     <div class="nav-links">
       <a href="#mission">Mission</a>
       <a href="#values">Values</a>
-      <a href="#work">Our Work</a>
-      <a href="#signup">Stay in Touch</a>
+      <a href="#work">Work</a>
+      <a href="#signup">Updates</a>
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner">
-      <!-- Inline SVG logo badge — no external image needed -->
-      <svg class="logo-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Echo and Orbit logo">
-        <circle cx="100" cy="100" r="96" fill="#1a2b4a" stroke="#3d3d3d" stroke-width="4"/>
-        <ellipse cx="100" cy="100" rx="88" ry="88" fill="none" stroke="#6b9a7f" stroke-width="1.5" opacity="0.4"/>
-        <ellipse cx="100" cy="100" rx="78" ry="78" fill="none" stroke="#f5f3ed" stroke-width="1" opacity="0.25"/>
-        <circle cx="158" cy="46" r="5" fill="#3d3d3d"/>
-        <circle cx="42" cy="154" r="5" fill="#3d3d3d"/>
-        <text x="100" y="82" font-family="Montserrat, sans-serif" font-size="26" font-weight="700" fill="#f5f3ed" text-anchor="middle" letter-spacing="2">ECHO</text>
-        <text x="100" y="108" font-family="Montserrat, sans-serif" font-size="14" font-weight="400" fill="#6b9a7f" text-anchor="middle">&amp;</text>
-        <text x="100" y="138" font-family="Montserrat, sans-serif" font-size="26" font-weight="700" fill="#f5f3ed" text-anchor="middle" letter-spacing="2">ORBIT</text>
-      </svg>
-
-      <p class="tagline">Amplify Your Mission</p>
-      <h1>High-Tech Infrastructure<br>for Underdogs</h1>
-      <p>High-level technology shouldn't be a gatekept luxury. We provide grassroots movements with the same elite-tier digital infrastructure used by billion-dollar entities—minus the corporate overhead and environmental footprint.</p>
+    <div class="hero-left">
+      <p class="tagline">// v1.0.0 &nbsp;&mdash;&nbsp; Knoxville, TN</p>
+      <h1>High-Tech<br>Infrastructure<br>for <em>Underdogs</em></h1>
+      <p class="hero-desc">Groundswell movements and mission-driven organizations deserve the same elite-tier technology as billion-dollar companies — without the billion-dollar budget or environmental cost.</p>
+      <a href="#signup" class="hero-cta">&rarr; STAY IN THE LOOP</a>
+    </div>
+    <div class="hero-right">
+      <div class="terminal bracketed">
+        <span class="bracket-tr"></span>
+        <span class="bracket-bl"></span>
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="terminal-title">mission_status.json</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-prompt">
+            <span class="t-dim">echoandorbit $</span> cat mission_status.json
+          </div>
+          <div id="terminal-output"></div><span class="cursor" id="cursor"></span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- VISION / MISSION -->
   <section class="vm-section" id="mission">
-    <div class="vm-inner">
-      <h2>The Vision</h2>
-      <p>We want to see a world where the power of high-level technology belongs to the people, ensuring that every voice has the digital foundation to be heard.</p>
-
-      <hr class="vm-divider" />
-
-      <h2>The Mission</h2>
-      <p>Our mission is to <span class="highlight">amplify</span> the voices that matter by building smart, accessible, and eco-conscious web tools. We give the underdogs the digital platforms that tech giants are gatekeeping, empowering them to focus on the work that changes lives.</p>
-      <p>We believe those working for the good of others deserve the same <span class="highlight">innovative technology</span> as the elite — because impact shouldn't be limited by a paywall.</p>
-      <p>All while keeping the environment in mind. Learn about our <a href="#" class="climate-link">Climate Pledge</a>.</p>
+    <div class="vm-grid">
+      <div class="vm-mission">
+        <p class="section-label">// 01 &mdash; Purpose</p>
+        <h2>The Mission</h2>
+        <p>Our mission is to <span class="highlight">amplify</span> the voices that matter by building smart, accessible, and eco-conscious web tools. We give the underdogs the digital platforms that tech giants are gatekeeping, empowering them to focus on the work that changes lives.</p>
+        <p>We believe those working for the good of others deserve the same <span class="highlight">innovative technology</span> as the elite &mdash; because impact shouldn't be limited by a paywall.</p>
+        <p>All while keeping the environment in mind. Learn about our <a href="#" class="climate-link">Climate Pledge &rarr;</a></p>
+      </div>
+      <div class="vm-vision">
+        <span class="vision-label">// Vision</span>
+        <blockquote>
+          A world where high-level technology <em>belongs to the people</em> &mdash; every voice with the digital foundation to be heard.
+        </blockquote>
+      </div>
     </div>
   </section>
 
-  <!-- CORE VALUES -->
   <section class="values-section" id="values">
-    <div class="values-inner">
-      <h2 class="section-title">Our Core Values</h2>
-      <div class="values-grid">
-        <div class="value-card">
-          <h3>Radical Accessibility</h3>
-          <p>High-level technology shouldn't be a luxury item. We're dedicated to tearing down the digital gatekeeping that keeps innovative tools in the hands of the elite. By providing nonprofits and grassroots candidates with elite-tier infrastructure, we ensure equity isn't just a goal — it's the foundation.</p>
-        </div>
-        <div class="value-card">
-          <h3>Low-Carbon Innovation</h3>
-          <p>We refuse to sacrifice the future to build the present. Innovation shouldn't come at the cost of the environment. To ensure our AI-driven tools and web platforms are a net positive for the planet, we've integrated sustainability into our financial DNA.</p>
-        </div>
-        <div class="value-card">
-          <h3>Rooted Growth</h3>
-          <p>While we reach for the "Orbit," we stay grounded in our "Echo." We prioritize the health of our local Knoxville and Tennessee communities, supporting the businesses and residents who make our home what it is. We grow only as our community grows.</p>
-        </div>
-        <div class="value-card">
-          <h3>Transparent Intelligence</h3>
-          <p>We believe in tech that serves humans, not the other way around. We are open about our use of AI and automation, using these tools to give time back to our clients so they can continue fighting the good fight. Our tech is smart, but our intentions are always human-first.</p>
-        </div>
+    <p class="section-label">// 02 &mdash; Principles</p>
+    <h2 class="section-title">Core Values</h2>
+    <div class="values-grid">
+      <div class="value-card bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <h3>Radical Accessibility</h3>
+        <p>High-level technology shouldn't be a luxury item. We're dedicated to tearing down the digital gatekeeping that keeps innovative tools in the hands of the elite. By providing nonprofits and grassroots candidates with elite-tier infrastructure, we ensure equity isn't just a goal &mdash; it's the foundation.</p>
+      </div>
+      <div class="value-card bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <h3>Low-Carbon Innovation</h3>
+        <p>We refuse to sacrifice the future to build the present. Innovation shouldn't come at the cost of the environment. To ensure our AI-driven tools and web platforms are a net positive for the planet, we've integrated sustainability into our financial DNA.</p>
+      </div>
+      <div class="value-card bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <h3>Rooted Growth</h3>
+        <p>While we reach for the "Orbit," we stay grounded in our "Echo." We prioritize the health of our local Knoxville and Tennessee communities, supporting the businesses and residents who make our home what it is. We grow only as our community grows.</p>
+      </div>
+      <div class="value-card bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <h3>Transparent Intelligence</h3>
+        <p>We believe in tech that serves humans, not the other way around. We are open about our use of AI and automation, using these tools to give time back to our clients so they can continue fighting the good fight. Our tech is smart, but our intentions are always human-first.</p>
       </div>
     </div>
   </section>
 
-  <!-- OUR WORK -->
   <section class="work-section" id="work">
-    <div class="work-inner">
-      <h2 class="section-title">Our Work</h2>
-      <p class="work-intro">We've built digital infrastructure for mission-driven organizations tackling the issues that matter most.</p>
-      <div class="work-grid">
-        <div class="work-card">
+    <p class="section-label">// 03 &mdash; Deployments</p>
+    <h2 class="section-title">Our Work</h2>
+    <p class="work-intro">Digital infrastructure built for mission-driven organizations tackling the issues that matter most.</p>
+    <div class="bento-grid">
+      <div class="bento-card featured bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <div>
+          <p class="card-label">// Civic Tech &mdash; Tennessee</p>
           <h3>Vote 4 Kids</h3>
-          <p>A comprehensive candidate tracker for Tennessee voters, making it easy to find where candidates stand on issues affecting children and families.</p>
-          <a href="https://vote4kids.org" target="_blank" rel="noopener noreferrer" class="work-link">Visit Site →</a>
+          <p>A comprehensive candidate tracker for Tennessee voters &mdash; making it easy to find where every candidate stands on issues affecting children and families. Elite infrastructure. Grassroots mission.</p>
         </div>
-        <div class="work-card">
+        <a href="https://vote4kids.org" target="_blank" rel="noopener noreferrer" class="bento-link">&rarr; VISIT SITE</a>
+      </div>
+      <div class="bento-card secondary bracketed">
+        <span class="bracket-tr"></span><span class="bracket-bl"></span>
+        <div>
+          <p class="card-label">// Policy Tracking</p>
           <h3>EC Policy Watch</h3>
-          <p>Transparent policy tracking and civic information for community advocates, bringing clarity to complex legislative landscapes.</p>
-          <a href="https://ecpolicywatch.com" target="_blank" rel="noopener noreferrer" class="work-link">Visit Site →</a>
+          <p>Transparent policy tracking and civic information for community advocates.</p>
         </div>
+        <a href="https://ecpolicywatch.com" target="_blank" rel="noopener noreferrer" class="bento-link">&rarr; VISIT SITE</a>
       </div>
     </div>
   </section>
 
-  <!-- SIGNUP -->
   <section class="signup-section" id="signup">
+    <p class="section-label" style="color: var(--sage); opacity: 0.7;">// 04 &mdash; Connect</p>
     <div class="signup-inner">
-      <h2>Stay in the Loop</h2>
-      <p>Get updates on new tools, features, and stories from the frontlines of digital equity.</p>
+      <h2>Stay in<br>the Loop</h2>
+      <p>Updates on new tools, features, and stories from the frontlines of digital equity.</p>
       <form class="signup-form" id="signup-form" novalidate>
-        <input
-          id="email-input"
-          type="email"
-          class="form-input"
-          placeholder="your@email.com"
-          autocomplete="email"
-          required
-          aria-label="Email address"
-        />
-        <button type="submit" class="form-btn">Sign Up for Updates</button>
-        <div class="form-success" id="form-success" role="status" aria-live="polite">
-          ✓ You're on the list! We'll be in touch.
-        </div>
+        <input id="email-input" type="email" class="form-input" placeholder="your@email.com" autocomplete="email" required aria-label="Email address" />
+        <button type="submit" class="form-btn">SIGN UP &rarr;</button>
       </form>
+      <div class="form-success" id="form-success" role="status" aria-live="polite">
+        &check; &nbsp;You're on the list. We'll be in touch.
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Echo &amp; Orbit &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#96e4f9f4f3e4e2e5f4fcf3e5e5d6f1fbf7fffab8f5f9fb">Get in Touch</a></p>
+    <p>&copy; 2026 ECHO &amp; ORBIT &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="mailto:robertsbjess@gmail.com">GET IN TOUCH</a></p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    const form = document.getElementById('signup-form');
-    const emailInput = document.getElementById('email-input');
-    const submitBtn = form.querySelector('.form-btn');
-    const successDiv = document.getElementById('form-success');
+  <script>
+    const lines = [
+      '{',
+      '  "org_type":     "web_agency",',
+      '  "mission":      "amplify",',
+      '  "clients":      ["nonprofits", "grassroots"],',
+      '  "location":     "Knoxville, TN",',
+      '  "carbon_pledge": true,',
+      '  "ai_powered":   true,',
+      '  "access_tier":  "elite",',
+      '  "paywall":      false,',
+      '  "status":       "ACTIVE"',
+      '}'
+    ];
 
-    // Simple email validation
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const output = document.getElementById('terminal-output');
+    const cursor = document.getElementById('cursor');
+
+    function highlight(line) {
+      return line
+        .replace(/("[\w_]+")\s*:/g,  '<span class="t-key">$1</span>:')
+        .replace(/:\s*(".*?")/g,     ': <span class="t-str">$1</span>')
+        .replace(/:\s*(true|false)/g,':<span class="t-bool"> $1</span>')
+        .replace(/\[([^\]]+)\]/g,    (m, inner) => {
+          const items = inner.replace(/"([^"]+)"/g, '<span class="t-str">"$1"</span>');
+          return '<span class="t-punct">[</span>' + items + '<span class="t-punct">]</span>';
+        })
+        .replace(/^([{}])$/, '<span class="t-punct">$1</span>');
     }
 
-    form.addEventListener('submit', function (e) {
+    let lineIdx = 0, charIdx = 0, displayed = '';
+    const CHAR_DELAY = 28, LINE_DELAY = 80;
+
+    function typeTick() {
+      if (lineIdx >= lines.length) return;
+      const rawLine = lines[lineIdx];
+      if (charIdx < rawLine.length) {
+        charIdx++;
+        output.innerHTML = displayed + highlight(rawLine.slice(0, charIdx));
+        setTimeout(typeTick, CHAR_DELAY);
+      } else {
+        displayed += highlight(rawLine) + '\n';
+        output.innerHTML = displayed;
+        lineIdx++; charIdx = 0;
+        setTimeout(typeTick, LINE_DELAY);
+      }
+    }
+
+    setTimeout(typeTick, 800);
+
+    const form = document.getElementById('signup-form');
+    const emailInput = document.getElementById('email-input');
+    const successDiv = document.getElementById('form-success');
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
       const email = emailInput.value.trim();
-
-      if (!isValidEmail(email)) {
-        emailInput.style.boxShadow = '0 0 0 3px rgba(220,50,50,0.4)';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput.style.borderColor = '#ff5f57';
         emailInput.focus();
         return;
       }
-
-      emailInput.style.boxShadow = '';
-
-      // ── SWAP IN YOUR EMAIL SERVICE URL HERE WHEN READY ──
-      // fetch('https://your-endpoint.workers.dev', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email })
-      // });
-
-      // For now: store locally in localStorage
+      emailInput.style.borderColor = '';
       const signups = JSON.parse(localStorage.getItem('eo_signups') || '[]');
       signups.push({ email, date: new Date().toISOString() });
       localStorage.setItem('eo_signups', JSON.stringify(signups));
-
-      // Show success state
-      emailInput.style.display = 'none';
-      submitBtn.style.display = 'none';
+      form.style.display = 'none';
       successDiv.style.display = 'block';
-
-      // Reset after 4s
       setTimeout(() => {
-        emailInput.style.display = '';
-        submitBtn.style.display = '';
+        form.style.display = '';
         successDiv.style.display = 'none';
         emailInput.value = '';
       }, 4000);
     });
   </script>
-
 </body>
 </html>
