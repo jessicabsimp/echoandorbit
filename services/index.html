@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Echo &amp; Orbit</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&family=Quicksand:wght@600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:       #1a2b4a;
+      --slate:      #2e3a4e;
+      --charcoal:   #3d3d3d;
+      --sage:       #6b9a7f;
+      --light-sage: #c7dcd3;
+      --cream:      #f5f3ed;
+      --white:      #ffffff;
+      --side:       12vw;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; line-height: 1.6; color: var(--charcoal); background: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem var(--side);
+      background: var(--navy); border-bottom: 1px solid var(--slate);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 3.2rem; width: auto; display: block; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-logo-name { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--cream); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-logo-tagline { color: var(--sage); font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 1rem; margin-left: 2rem; font-family: 'Space Mono', monospace; letter-spacing: 0.5px; transition: color 0.2s; opacity: 0.8; }
+    .nav-links a:hover, .nav-links a.active { color: var(--sage); opacity: 1; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(160deg, var(--cream) 0%, #eceee8 100%);
+      border-bottom: 1px solid var(--slate);
+      padding: 5rem var(--side) 4rem;
+    }
+    .page-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .page-title { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: var(--navy); letter-spacing: -1px; line-height: 1.05; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .page-subtitle { font-size: 1.1rem; color: var(--charcoal); line-height: 1.8; max-width: 600px; }
+
+    /* ── TIERS SECTION ── */
+    .tiers-section { padding: 5rem var(--side); background: var(--white); border-bottom: 1px solid var(--slate); }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--navy); letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 3rem; }
+
+    .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+    .tier-card {
+      border: 1px solid var(--slate);
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .tier-card::before, .tier-card::after {
+      content: ''; position: absolute; width: 12px; height: 12px;
+      border-color: var(--slate); border-style: solid; pointer-events: none; z-index: 1;
+    }
+    .tier-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .tier-card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .tier-header { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--slate); }
+    .tier-num { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 2px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .tier-name { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .tier-tagline { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--charcoal); opacity: 0.7; letter-spacing: 0.5px; }
+
+    .tier-body { padding: 1.75rem 2rem 2rem; flex: 1; display: flex; flex-direction: column; }
+    .tier-desc { font-size: 0.97rem; line-height: 1.75; color: var(--charcoal); margin-bottom: 1.5rem; }
+    .tier-features { list-style: none; margin-bottom: 2rem; flex: 1; }
+    .tier-features li {
+      font-size: 0.9rem; color: var(--charcoal); padding: 0.5rem 0;
+      border-bottom: 1px solid #eee; display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .tier-features li::before { content: '//'; color: var(--sage); font-family: 'Space Mono', monospace; font-size: 0.7rem; margin-top: 2px; flex-shrink: 0; }
+
+    .tier-cta {
+      display: inline-block; padding: 0.75rem 1.5rem;
+      border: 1px solid var(--slate); color: var(--navy);
+      font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 1px;
+      text-decoration: none; text-align: center;
+      transition: all 0.2s;
+    }
+    .tier-cta:hover { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+
+    .tier-card.featured { background: var(--navy); border-color: var(--sage); }
+    .tier-card.featured::before, .tier-card.featured::after { border-color: var(--sage); }
+    .tier-card.featured .tier-header { border-bottom-color: var(--slate); }
+    .tier-card.featured .tier-name { color: var(--cream); }
+    .tier-card.featured .tier-tagline { color: var(--light-sage); opacity: 0.8; }
+    .tier-card.featured .tier-num { color: var(--sage); }
+    .tier-card.featured .tier-desc { color: #a8bfd6; }
+    .tier-card.featured .tier-features li { color: #c8d8e8; border-bottom-color: #253d5f; }
+    .tier-card.featured .tier-features li::before { color: var(--sage); }
+    .tier-card.featured .tier-cta { border-color: var(--sage); color: var(--sage); }
+    .tier-card.featured .tier-cta:hover { background: var(--sage); color: var(--navy); }
+
+    .tier-badge {
+      position: absolute; top: -1px; right: 2rem;
+      background: var(--sage); color: var(--white);
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 1px;
+      padding: 0.2rem 0.6rem; text-transform: uppercase;
+    }
+
+    /* ── INSTACLAW ── */
+    .instaclaw-section { padding: 5rem var(--side); background: var(--cream); border-bottom: 1px solid var(--slate); }
+    .instaclaw-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .instaclaw-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .instaclaw-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 1.25rem; }
+    .instaclaw-desc { font-size: 1rem; line-height: 1.8; color: var(--charcoal); margin-bottom: 1rem; }
+    .instaclaw-note {
+      font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--charcoal);
+      opacity: 0.7; line-height: 1.6; padding: 1rem; border: 1px solid var(--slate);
+      background: var(--white);
+    }
+    .instaclaw-terminal {
+      background: #0d1520; border: 1px solid var(--sage);
+      padding: 0; overflow: hidden;
+    }
+    .instaclaw-bar {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 0.8rem; background: #1a2535; border-bottom: 1px solid var(--slate);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+    .ic-title { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: #556a85; margin-left: auto; }
+    .instaclaw-chat { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; }
+    .chat-msg { font-family: 'Space Mono', monospace; font-size: 0.78rem; line-height: 1.6; }
+    .chat-user { color: #9ecbff; }
+    .chat-user::before { content: 'CLIENT  > '; color: #556a85; }
+    .chat-bot  { color: #5ddb8f; }
+    .chat-bot::before  { content: 'INSTACLAW> '; color: var(--sage); }
+
+    /* ── CONTACT FORM ── */
+    .contact-section { padding: 5rem var(--side); background: var(--navy); }
+    .contact-inner { max-width: 800px; }
+    .contact-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.8; }
+    .contact-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--cream); letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .contact-subtitle { font-size: 1rem; color: #a8bfd6; margin-bottom: 2.5rem; line-height: 1.65; }
+
+    .intake-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 1px; color: var(--light-sage); text-transform: uppercase; }
+    .field input, .field select, .field textarea {
+      padding: 0.85rem 1rem; font-size: 0.95rem; font-family: 'Lato', sans-serif;
+      border: 1px solid var(--slate); background: #0d1520; color: var(--cream); outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: #3d5a72; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--sage); }
+    .field select { appearance: none; cursor: pointer; }
+    .field select option { background: #0d1520; color: var(--cream); }
+    .field textarea { resize: vertical; min-height: 120px; }
+
+    .submit-btn {
+      padding: 1rem 2.5rem; background: var(--sage); color: var(--white);
+      border: 1px solid var(--sage); font-family: 'Space Mono', monospace;
+      font-size: 0.85rem; letter-spacing: 1px; cursor: pointer; align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: #5a8a6f; }
+
+    .form-success-msg {
+      display: none; font-family: 'Space Mono', monospace; font-size: 0.9rem;
+      color: #5ddb8f; padding: 1rem; border: 1px solid var(--sage);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d1520; color: #556a85; text-align: center;
+      padding: 1.5rem var(--side); font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.5px; border-top: 1px solid var(--slate);
+    }
+    footer a { color: var(--sage); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .tiers-grid { grid-template-columns: 1fr; }
+      .instaclaw-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .page-header { padding: 3.5rem 8%; }
+      .tiers-section, .instaclaw-section, .contact-section { padding: 3.5rem 8%; }
+      footer { padding: 1.5rem 8%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <img class="nav-logo-img" src="../logo-cream.png" alt="Echo &amp; Orbit logo" />
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">ECHO &amp; ORBIT</span>
+        <span class="nav-logo-tagline">// AMPLIFY YOUR MISSION</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#mission">Mission</a>
+      <a href="/#values">Values</a>
+      <a href="/services" class="active">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/climate-pledge">Climate</a>
+      <a href="/#signup">Updates</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <p class="page-label">// What We Build</p>
+    <h1 class="page-title">Services</h1>
+    <p class="page-subtitle">Elite-tier digital infrastructure, built for the organizations doing the work that matters. Three tiers — sized for where you are, built to grow with you.</p>
+  </header>
+
+  <!-- SERVICE TIERS -->
+  <section class="tiers-section">
+    <p class="section-label">// 01 — Build Tiers</p>
+    <h2 class="section-title">Choose Your Launchpad</h2>
+    <div class="tiers-grid">
+
+      <!-- TIER 1: ECHO -->
+      <div class="tier-card">
+        <div class="tier-header">
+          <p class="tier-num">// Tier 01</p>
+          <h3 class="tier-name">Echo</h3>
+          <p class="tier-tagline">Your voice, broadcast out</p>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">A clean, fast, professional static site — everything you need to establish a credible digital presence without the overhead.</p>
+          <ul class="tier-features">
+            <li>Custom-designed static website</li>
+            <li>Contact information &amp; about page</li>
+            <li>Mobile-responsive layout</li>
+            <li>Custom domain connection</li>
+            <li>Basic SEO foundation</li>
+            <li>InstaClaw.bot integration available</li>
+          </ul>
+          <a href="#contact" class="tier-cta">→ START HERE</a>
+        </div>
+      </div>
+
+      <!-- TIER 2: ORBIT -->
+      <div class="tier-card featured">
+        <span class="tier-badge">Most Popular</span>
+        <div class="tier-header">
+          <p class="tier-num">// Tier 02</p>
+          <h3 class="tier-name">Orbit</h3>
+          <p class="tier-tagline">In motion. Interactive. Connected.</p>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">A dynamic, full-featured site with interactive tools built around your mission — scheduling, forms, event calendars, member portals, and more.</p>
+          <ul class="tier-features">
+            <li>Everything in Echo</li>
+            <li>Dynamic content &amp; scheduling tools</li>
+            <li>Event calendars &amp; registration</li>
+            <li>Interactive forms &amp; intake flows</li>
+            <li>Third-party integrations (email, CRM)</li>
+            <li>Content management capability</li>
+            <li>InstaClaw.bot integration available</li>
+          </ul>
+          <a href="#contact" class="tier-cta">→ LET'S TALK</a>
+        </div>
+      </div>
+
+      <!-- TIER 3: MISSION CONTROL -->
+      <div class="tier-card">
+        <div class="tier-header">
+          <p class="tier-num">// Tier 03</p>
+          <h3 class="tier-name">Mission Control</h3>
+          <p class="tier-tagline">Full system. Data. Command.</p>
+        </div>
+        <div class="tier-body">
+          <p class="tier-desc">A full-stack platform with live data, automated workflows, custom dashboards, and real-time updates — the infrastructure that moves fast organizations faster.</p>
+          <ul class="tier-features">
+            <li>Everything in Orbit</li>
+            <li>Custom database architecture</li>
+            <li>Live data dashboards &amp; trackers</li>
+            <li>Automated update workflows</li>
+            <li>AI-powered tools &amp; integrations</li>
+            <li>Candidate / policy tracking systems</li>
+            <li>Dedicated build &amp; support engagement</li>
+          </ul>
+          <a href="#contact" class="tier-cta">→ LET'S TALK</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSTACLAW.BOT -->
+  <section class="instaclaw-section">
+    <div class="instaclaw-inner">
+      <div>
+        <p class="instaclaw-label">// Add-On Service</p>
+        <h2 class="instaclaw-title">Meet InstaClaw.bot</h2>
+        <p class="instaclaw-desc">Every Echo &amp; Orbit site can be connected to <strong>InstaClaw.bot</strong> — an AI assistant that gives you the ability to manage your own site through a simple chat interface. Update copy, swap images, change hours, connect your domain — no developer required.</p>
+        <p class="instaclaw-desc">Hosting and maintenance are bundled into your InstaClaw.bot monthly plan, so you get one flat fee that covers everything.</p>
+        <div class="instaclaw-note">
+          ⚠ &nbsp;InstaClaw.bot is designed for content updates and basic site management. Requests that go beyond its scope — or that result in site-breaking changes — may incur a service charge to diagnose and restore.
+        </div>
+      </div>
+      <div>
+        <div class="instaclaw-terminal">
+          <div class="instaclaw-bar">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span class="ic-title">instaclaw.bot — session active</span>
+          </div>
+          <div class="instaclaw-chat">
+            <div class="chat-msg chat-user">Update our office hours to Mon–Fri 9am–5pm</div>
+            <div class="chat-msg chat-bot">Done. Office hours updated on your contact page and footer.</div>
+            <div class="chat-msg chat-user">Add our new board member, Sarah Chen, to the team page</div>
+            <div class="chat-msg chat-bot">Sarah Chen added to /team with placeholder bio. Send a photo and bio when ready.</div>
+            <div class="chat-msg chat-user">Connect our new domain nonprofit-name.org</div>
+            <div class="chat-msg chat-bot">Domain connected and SSL certificate provisioned. Live in ~2 min.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / INTAKE FORM -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <p class="contact-label">// 02 — Get Started</p>
+      <h2 class="contact-title">Start the Conversation</h2>
+      <p class="contact-subtitle">Tell us about your project. We'll follow up within 2 business days with questions, ideas, and next steps.</p>
+
+      <form class="intake-form" id="intake-form"
+        action="https://api.web3forms.com/submit"
+        method="POST">
+
+        <!-- Web3Forms config -->
+        <input type="hidden" name="access_key" value="ad3cd340-f09c-47fe-93e7-704700effab7" />
+        <input type="hidden" name="subject" value="New project inquiry — Echo &amp; Orbit" />
+        <input type="hidden" name="from_name" value="Echo &amp; Orbit Services Page" />
+        <input type="hidden" name="redirect" value="false" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" />
+
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Name *</label>
+            <input type="text" id="f-name" name="Name" placeholder="Your full name" required />
+          </div>
+          <div class="field">
+            <label for="f-email">Email *</label>
+            <input type="email" id="f-email" name="Email" placeholder="your@email.com" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="f-org">Organization *</label>
+            <input type="text" id="f-org" name="Organization" placeholder="Organization or campaign name" required />
+          </div>
+          <div class="field">
+            <label for="f-website">Current Website (if any)</label>
+            <input type="url" id="f-website" name="Current Website" placeholder="https://" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="f-type">Type of Project *</label>
+            <select id="f-type" name="Project Type" required>
+              <option value="" disabled selected>Select a project type</option>
+              <option value="echo">Echo — Basic static site</option>
+              <option value="orbit">Orbit — Dynamic site</option>
+              <option value="mission-control">Mission Control — Full platform</option>
+              <option value="instaclaw">InstaClaw.bot connection only</option>
+              <option value="not-sure">Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-budget">Budget Range</label>
+            <select id="f-budget" name="Budget Range">
+              <option value="" disabled selected>Select a range</option>
+              <option value="under-1k">Under $1,000</option>
+              <option value="1k-3k">$1,000 – $3,000</option>
+              <option value="3k-7k">$3,000 – $7,000</option>
+              <option value="7k-15k">$7,000 – $15,000</option>
+              <option value="15k-plus">$15,000+</option>
+              <option value="unknown">Not sure</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-message">Project Description *</label>
+          <textarea id="f-message" name="Project Description" placeholder="Tell us what you're building, who it's for, and any key features or deadlines." required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="f-referral">How Did You Hear About Us?</label>
+          <input type="text" id="f-referral" name="Referral Source" placeholder="Google, referral, social media..." />
+        </div>
+
+        <button type="submit" class="submit-btn" id="intake-submit">SEND INQUIRY →</button>
+      </form>
+
+      <div class="form-success-msg" id="intake-success">
+        ✓ &nbsp;Got it — we'll be in touch within 2 business days.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 ECHO &amp; ORBIT &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="mailto:jessicabsimp@gmail.com">GET IN TOUCH</a></p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('intake-form');
+    const submitBtn = document.getElementById('intake-submit');
+    const successMsg = document.getElementById('intake-success');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      submitBtn.textContent = 'SENDING…';
+      submitBtn.disabled = true;
+
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+        const json = await res.json();
+        if (json.success) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else throw new Error();
+      } catch {
+        submitBtn.textContent = 'TRY AGAIN →';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
