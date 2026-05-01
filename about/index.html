@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Echo &amp; Orbit</title>
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lato:wght@400;700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2b4a; --slate: #2e3a4e; --charcoal: #3d3d3d;
+      --sage: #6b9a7f; --light-sage: #c7dcd3; --cream: #f5f3ed; --white: #ffffff;
+      --side: 12vw;
+    }
+    html { scroll-behavior: smooth; }
+
+    /* ── BANNER ── */
+    .site-banner {
+      background: var(--sage); color: var(--white);
+      text-align: center; padding: 0.55rem var(--side);
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 1.5px; border-bottom: 1px solid #5a8a6f;
+    }
+    .site-banner a { color: var(--white); text-decoration: underline; margin-left: 0.5rem; }
+
+    body { font-family: 'Lato', sans-serif; line-height: 1.6; color: var(--charcoal); background: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem var(--side); background: var(--navy);
+      border-bottom: 1px solid var(--slate); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 3.2rem; width: auto; display: block; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-logo-name { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--cream); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-logo-tagline { color: var(--sage); font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 1rem; margin-left: 2rem; font-family: 'Space Mono', monospace; letter-spacing: 0.5px; transition: color 0.2s; opacity: 0.8; }
+    .nav-links a:hover, .nav-links a.active { color: var(--sage); opacity: 1; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 5rem var(--side) 4.5rem;
+      background: var(--navy);
+      border-bottom: 1px solid var(--slate);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+    }
+    .page-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.75rem; opacity: 0.8; }
+    .page-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; color: var(--cream); letter-spacing: -2px; line-height: 0.95; text-transform: uppercase; }
+    .page-title em { font-style: normal; color: var(--sage); }
+    .header-right { padding-bottom: 0.5rem; }
+    .header-quote {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 600; color: #a8bfd6; line-height: 1.6;
+      border-left: 2px solid var(--sage); padding-left: 1.5rem;
+    }
+    .header-quote em { font-style: normal; color: var(--sage); }
+
+    /* ── ORIGIN STORY ── */
+    .origin-section {
+      padding: 5.5rem var(--side);
+      background: var(--cream);
+      border-bottom: 1px solid var(--slate);
+      display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start;
+    }
+    .origin-sidebar { position: sticky; top: 6rem; }
+    .sidebar-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 1rem; }
+    .sidebar-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1.2; }
+    .sidebar-divider { width: 40px; height: 2px; background: var(--sage); margin: 1.5rem 0; }
+    .sidebar-meta { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--charcoal); opacity: 0.5; letter-spacing: 1px; line-height: 1.8; }
+
+    .origin-body p {
+      font-size: 1.08rem; line-height: 1.9; color: var(--charcoal); margin-bottom: 1.5rem;
+    }
+    .origin-body p:last-child { margin-bottom: 0; }
+    .origin-body strong { color: var(--navy); font-weight: 700; }
+    .origin-body em { font-style: normal; color: var(--sage); font-weight: 600; }
+
+    /* ── MISSION & VALUES ── */
+    .values-section {
+      padding: 5.5rem var(--side);
+      background: var(--white);
+      border-bottom: 1px solid var(--slate);
+    }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--navy); letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 3rem; }
+
+    .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .value-item {
+      padding: 2rem; border: 1px solid var(--slate); position: relative;
+    }
+    .value-item::before, .value-item::after {
+      content: ''; position: absolute; width: 10px; height: 10px;
+      border-color: var(--slate); border-style: solid;
+    }
+    .value-item::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .value-item::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .value-num { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .value-name { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
+    .value-desc { font-size: 0.95rem; line-height: 1.75; color: var(--charcoal); }
+
+    /* ── ROOTS SECTION ── */
+    .roots-section {
+      padding: 5rem var(--side);
+      background: var(--cream);
+      border-bottom: 1px solid var(--slate);
+      display: grid; grid-template-columns: 2fr 1fr; gap: 5rem; align-items: center;
+    }
+    .roots-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .roots-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 1.25rem; }
+    .roots-body p { font-size: 1.05rem; line-height: 1.85; color: var(--charcoal); margin-bottom: 1rem; }
+    .roots-body p:last-child { margin-bottom: 0; }
+    .roots-body em { font-style: normal; color: var(--sage); font-weight: 600; }
+
+    .roots-stat-stack { display: flex; flex-direction: column; gap: 2rem; }
+    .roots-stat { border-left: 2px solid var(--sage); padding-left: 1.25rem; }
+    .roots-stat-val { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--navy); line-height: 1; }
+    .roots-stat-lbl { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 2px; color: var(--charcoal); opacity: 0.6; text-transform: uppercase; margin-top: 0.3rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d1520; color: #556a85; text-align: center;
+      padding: 1.5rem var(--side); font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.5px; border-top: 1px solid var(--slate);
+    }
+    footer a { color: var(--sage); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .page-header { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 8% 3rem; }
+      .origin-section { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem 8%; }
+      .origin-sidebar { position: static; }
+      .values-section { padding: 3.5rem 8%; }
+      .values-grid { grid-template-columns: 1fr; }
+      .roots-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 8%; }
+      footer { padding: 1.5rem 8%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER -->
+  <div class="site-banner">
+    // NOW ACCEPTING NEW PROJECTS FOR 2026 &nbsp;&mdash;&nbsp;
+    <a href="/services#contact">START A PROJECT →</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <img class="nav-logo-img" src="../logo-cream.png" alt="Echo &amp; Orbit logo" />
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">ECHO &amp; ORBIT</span>
+        <span class="nav-logo-tagline">// AMPLIFY YOUR MISSION</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/about" class="active">About</a>
+      <a href="/services">Services</a>
+      <a href="/projects">Our Projects</a>
+      <a href="/climate-pledge">Climate</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div>
+      <p class="page-label">// Who We Are</p>
+      <h1 class="page-title">Built<br>from the<br><em>Inside</em><br>Out.</h1>
+    </div>
+    <div class="header-right">
+      <p class="header-quote">
+        Echo &amp; Orbit didn't start as a business idea. It started as a <em>problem worth solving</em> — and a set of tools built to solve it.
+      </p>
+    </div>
+  </header>
+
+  <!-- ORIGIN STORY -->
+  <section class="origin-section">
+    <div class="origin-sidebar">
+      <p class="sidebar-label">// 01 — The Origin</p>
+      <h2 class="sidebar-title">Where It Started</h2>
+      <div class="sidebar-divider"></div>
+      <p class="sidebar-meta">
+        Founded: 2026<br>
+        Based: Knoxville, TN<br>
+        Focus: Civic + Nonprofit Tech
+      </p>
+    </div>
+    <div class="origin-body">
+      <p>
+        Echo &amp; Orbit started with a specific frustration: <strong>Tennessee advocates working on early childhood policy had no real digital tools to do their jobs.</strong> Tracking legislation, understanding where candidates stood, connecting communities to the process — it was all manual, scattered, and exhausting.
+      </p>
+      <p>
+        So I built something. A few personal projects to help advocates better track early childhood legislation in Tennessee. Nothing fancy at first — just tools that made real work easier. But the more those tools took shape, the more a bigger pattern became clear.
+      </p>
+      <p>
+        <em>This wasn't a niche problem.</em> Campaigns, nonprofits, and advocacy organizations across the state — and across the country — were dealing with the same gap. The infrastructure to do meaningful digital work existed. But it was expensive, inaccessible, and built for the elite. The organizations that needed it most were exactly the ones who couldn't afford it.
+      </p>
+      <p>
+        That's the gap Echo &amp; Orbit was built to close. Not just for early childhood advocates, but for any mission-driven organization that deserves the same digital firepower as the institutions they're trying to hold accountable.
+      </p>
+      <p>
+        <strong>If your work is for the good of others, your tools should be too.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- MISSION & VALUES -->
+  <section class="values-section">
+    <p class="section-label">// 02 — What We Stand For</p>
+    <h2 class="section-title">Mission &amp; Values</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <p class="value-num">// Value 01</p>
+        <h3 class="value-name">Radical Accessibility</h3>
+        <p class="value-desc">High-level technology shouldn't be a luxury item. We're dedicated to tearing down the digital gatekeeping that keeps innovative tools in the hands of the elite. By providing nonprofits and grassroots candidates with elite-tier infrastructure, we ensure equity isn't just a goal — it's the foundation.</p>
+      </div>
+      <div class="value-item">
+        <p class="value-num">// Value 02</p>
+        <h3 class="value-name">Low-Carbon Innovation</h3>
+        <p class="value-desc">We refuse to sacrifice the future to build the present. Innovation shouldn't come at the cost of the environment. Every tool and platform we deploy is built with sustainability in mind — because impact work shouldn't create environmental debt. <a href="/climate-pledge" style="color:var(--sage);font-weight:600;">Read our Climate Pledge →</a></p>
+      </div>
+      <div class="value-item">
+        <p class="value-num">// Value 03</p>
+        <h3 class="value-name">Rooted Growth</h3>
+        <p class="value-desc">While we reach for the "Orbit," we stay grounded in our "Echo." We prioritize the health of our local Knoxville and Tennessee communities, supporting the businesses and residents who make our home what it is. We grow only as our community grows.</p>
+      </div>
+      <div class="value-item">
+        <p class="value-num">// Value 04</p>
+        <h3 class="value-name">Transparent Intelligence</h3>
+        <p class="value-desc">We believe in tech that serves humans, not the other way around. We are open about our use of AI and automation, using these tools to give time back to our clients so they can continue fighting the good fight. Our tech is smart, but our intentions are always human-first.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOTS -->
+  <section class="roots-section">
+    <div class="roots-body">
+      <p class="roots-label">// 03 — Where We're From</p>
+      <h2 class="roots-title">Knoxville Built. Tennessee Rooted.</h2>
+      <p>
+        Echo &amp; Orbit is a Knoxville, Tennessee company — and that's not incidental. The problems we're solving started here. The communities we care most about are here. And the standard we hold ourselves to is shaped by what it means to build something that actually serves the place you call home.
+      </p>
+      <p>
+        We don't treat Tennessee as a market. We treat it as a responsibility. The advocates, campaigns, and organizations doing meaningful work in this state deserve tools that reflect the seriousness of that work — and we're here to build them.
+      </p>
+      <p>
+        <em>We grow only as our community grows.</em> That's not a tagline. It's the operating principle behind every decision we make about which projects to take on and how we price them.
+      </p>
+    </div>
+    <div class="roots-stat-stack">
+      <div class="roots-stat">
+        <div class="roots-stat-val">2026</div>
+        <div class="roots-stat-lbl">Founded in Knoxville</div>
+      </div>
+      <div class="roots-stat">
+        <div class="roots-stat-val">TN-1st</div>
+        <div class="roots-stat-lbl">Local-first editorial policy</div>
+      </div>
+      <div class="roots-stat">
+        <div class="roots-stat-val">100%</div>
+        <div class="roots-stat-lbl">Mission-driven client base</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 ECHO &amp; ORBIT &mdash; Built with purpose in Knoxville, TN &nbsp;|&nbsp; <a href="mailto:jessicabsimp@gmail.com">GET IN TOUCH</a></p>
+  </footer>
+
+</body>
+</html>
